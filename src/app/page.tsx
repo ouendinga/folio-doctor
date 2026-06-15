@@ -76,6 +76,39 @@ export default function Home() {
     setError(null);
   };
 
+  const exportMarkdown = () => {
+    if (!report) return;
+    
+    const markdownContent = `
+# Informe Clínico de Portafolio: ${new URL(report.url).hostname}
+
+- **URL del Paciente**: ${report.url}
+- **Fecha de Chequeo**: ${new Date(report.timestamp).toLocaleString('es-ES')}
+- **Puntuación de Salud**: ${report.overallScore}/100
+- **Lighthouse Scores**:
+  - Rendimiento: ${report.lighthouse.performance}/100
+  - Accesibilidad: ${report.lighthouse.accessibility}/100
+  - Buenas Prácticas: ${report.lighthouse.bestPractices}/100
+  - SEO: ${report.lighthouse.seo}/100
+
+---
+
+${report.advice || 'No se generaron recomendaciones.'}
+
+---
+*Reporte generado por FolioDoctor.*
+`;
+
+    const blob = new Blob([markdownContent], { type: 'text/markdown;charset=utf-8;' });
+    const urlBlob = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = urlBlob;
+    link.setAttribute('download', `foliodoctor-reporte-${new URL(report.url).hostname}.md`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <>
       <header>
@@ -149,9 +182,17 @@ export default function Home() {
                 <p className="timestamp">
                   Analizado el: {new Date(report.timestamp).toLocaleString('es-ES')}
                 </p>
-                <button onClick={handleReset} className="submit-btn" style={{ marginTop: '1.5rem', background: 'transparent', border: '1px solid var(--border-color)', color: 'white' }}>
-                  💉 Alta Médica / Evaluar Otro
-                </button>
+                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '1.5rem' }}>
+                  <button onClick={handleReset} className="submit-btn no-print" style={{ background: 'transparent', border: '1px solid var(--border-color)', color: 'white' }}>
+                    💉 Alta Médica
+                  </button>
+                  <button onClick={exportMarkdown} className="submit-btn no-print" style={{ background: 'rgba(79, 172, 254, 0.15)', border: '1px solid var(--color-blue)', color: 'var(--color-blue)' }}>
+                    📄 Descargar Receta (.md)
+                  </button>
+                  <button onClick={() => window.print()} className="submit-btn no-print" style={{ background: 'rgba(0, 242, 254, 0.15)', border: '1px solid var(--color-cyan)', color: 'var(--color-cyan)' }}>
+                    🖨️ Guardar PDF (.pdf)
+                  </button>
+                </div>
               </div>
 
               <div className={`health-score-ring ${getHealthStatusClass(report.overallScore)}`}>

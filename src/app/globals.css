@@ -587,3 +587,148 @@ footer a {
 footer a:hover {
   color: var(--color-cyan);
 }
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .screenshots-container {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Clinical Report Print Styles (PDF Export) */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+  }
+
+  header, footer, .audit-form-container, .no-print, button, .submit-btn, .button-group {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .report-container {
+    gap: 1.5rem !important;
+    display: block !important;
+  }
+
+  .clinic-header-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    padding: 1.5rem !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+
+  .patient-info h2 {
+    color: #0f172a !important;
+  }
+
+  .health-score-ring {
+    background: #ffffff !important;
+    border: 4px solid #10b981 !important;
+    box-shadow: none !important;
+    width: 100px !important;
+    height: 100px !important;
+  }
+  
+  .health-score-ring.healthy { border-color: #10b981 !important; }
+  .health-score-ring.warning { border-color: #fbbf24 !important; }
+  .health-score-ring.danger { border-color: #ef4444 !important; }
+
+  .health-score-value {
+    color: #0f172a !important;
+    font-size: 2rem !important;
+  }
+
+  .score-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 1rem !important;
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .score-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    padding: 1rem !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .score-card .score {
+    font-size: 1.8rem !important;
+  }
+
+  .report-columns {
+    display: block !important;
+  }
+
+  .clinical-recipe {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    padding: 1.5rem !important;
+    margin-bottom: 2rem !important;
+    box-shadow: none !important;
+  }
+
+  .clinical-recipe h2 {
+    color: #0f172a !important;
+    border-bottom: 2px solid #cbd5e1 !important;
+  }
+
+  .clinical-recipe h3 {
+    color: #0284c7 !important;
+  }
+
+  .clinical-recipe p, .clinical-recipe li {
+    color: #334155 !important;
+  }
+
+  .details-column {
+    display: block !important;
+    page-break-before: always;
+  }
+
+  .detail-section-card {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    padding: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+    page-break-inside: avoid;
+  }
+
+  .detail-list {
+    max-height: none !important;
+    overflow-y: visible !important;
+    padding-right: 0 !important;
+  }
+
+  .detail-item {
+    border-bottom: 1px solid #e2e8f0 !important;
+    padding-bottom: 0.5rem !important;
+  }
+
+  .detail-item .subtitle {
+    color: #64748b !important;
+  }
+
+  .screenshot-box {
+    border: 1px solid #cbd5e1 !important;
+    background: #ffffff !important;
+  }
+}
