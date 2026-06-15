@@ -1,26 +1,589 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Color Palette - Surgical Clinic Theme */
+  --bg-main: #060913;
+  --bg-card: rgba(13, 20, 38, 0.7);
+  --bg-card-hover: rgba(20, 30, 58, 0.85);
+  --border-color: rgba(255, 255, 255, 0.06);
+  --border-color-glow: rgba(0, 242, 254, 0.4);
+  
+  --color-cyan: #00F2FE;
+  --color-cyan-rgb: 0, 242, 254;
+  --color-blue: #4FACFE;
+  --color-green: #10B981;
+  --color-yellow: #FBBF24;
+  --color-red: #EF4444;
+  
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-main);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(0, 242, 254, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(79, 172, 254, 0.05) 0px, transparent 50%),
+    linear-gradient(rgba(255, 255, 255, 0.003) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.003) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  min-height: 100vh;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+header {
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.5rem 2rem;
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: rgba(6, 9, 19, 0.8);
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo span {
+  font-size: 1.8rem;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  margin-left: 1.5rem;
+}
+
+.nav-links a:hover {
+  color: var(--color-cyan);
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+/* Landing Section */
+.hero {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #FFFFFF 0%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  max-width: 600px;
+  margin: 0 auto 2.5rem auto;
+}
+
+/* Form Container */
+.audit-form-container {
+  max-width: 700px;
+  margin: 0 auto 3rem auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.audit-form-container:focus-within {
+  border-color: var(--color-cyan);
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
+}
+
+.form-group {
+  display: flex;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .form-group {
+    flex-direction: column;
+  }
+}
+
+.url-input {
+  flex: 1;
+  background: rgba(6, 9, 19, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  color: white;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.url-input:focus {
+  border-color: var(--color-blue);
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-blue) 100%);
+  color: #060913;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+.submit-btn:disabled {
+  background: var(--text-muted);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Cardiogram Line / Loading Heartbeat Animation */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.pulse-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.heartbeat-icon {
+  font-size: 3rem;
+  color: var(--color-red);
+  animation: beat 1.2s infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.pulse-ring {
+  border: 3px solid rgba(0, 242, 254, 0.3);
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: pulsate 1.8s ease-out infinite;
+  opacity: 0;
+}
+
+@keyframes beat {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.15); }
+  35% { transform: scale(1.05); }
+  45% { transform: scale(1.2); }
+  55% { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes pulsate {
+  0% { transform: scale(0.6); opacity: 0; }
+  50% { opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.loading-text {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+/* Dashboard Report Grid */
+.report-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Clinical Header Card */
+.clinic-header-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  backdrop-filter: blur(10px);
+}
+
+@media (max-width: 768px) {
+  .clinic-header-card {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.patient-info h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.patient-info p {
+  color: var(--text-secondary);
+}
+
+.patient-info .timestamp {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+/* Health Badge Ring */
+.health-score-ring {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: rgba(6, 9, 19, 0.6);
+  border: 5px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+}
+
+.health-score-ring.healthy {
+  border-color: var(--color-green);
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.2);
+}
+
+.health-score-ring.warning {
+  border-color: var(--color-yellow);
+  box-shadow: 0 0 25px rgba(251, 191, 36, 0.2);
+}
+
+.health-score-ring.danger {
+  border-color: var(--color-red);
+  box-shadow: 0 0 25px rgba(239, 68, 68, 0.2);
+}
+
+.health-score-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.health-score-value span {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  letter-spacing: 0.1em;
+  margin-top: 0.25rem;
+}
+
+/* Score Grid */
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .score-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .score-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.score-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.score-card:hover {
+  transform: translateY(-4px);
+}
+
+.score-card h3 {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.score-card .score {
+  font-size: 2.25rem;
+  font-weight: 800;
+}
+
+.score-card .score.green { color: var(--color-green); }
+.score-card .score.yellow { color: var(--color-yellow); }
+.score-card .score.red { color: var(--color-red); }
+
+/* Double Column Layout */
+.report-columns {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 2.5rem;
+}
+
+@media (max-width: 900px) {
+  .report-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.clinical-recipe {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2.5rem;
+}
+
+.clinical-recipe h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.clinical-recipe h3 {
+  font-size: 1.2rem;
+  margin: 1.5rem 0 0.75rem 0;
+  color: var(--color-cyan);
+}
+
+.clinical-recipe p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.clinical-recipe ul, .clinical-recipe ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.clinical-recipe li {
+  margin-bottom: 0.5rem;
+}
+
+/* Right Column: Physical Diagnostics */
+.details-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.detail-section-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.detail-section-card h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-section-card h2 span.badge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.detail-section-card h2 span.badge.green { color: var(--color-green); background: rgba(16, 185, 129, 0.1); }
+.detail-section-card h2 span.badge.red { color: var(--color-red); background: rgba(239, 68, 68, 0.1); }
+
+.detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+/* Scrollbar styling */
+.detail-list::-webkit-scrollbar {
+  width: 4px;
+}
+.detail-list::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.1);
+}
+.detail-list::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+}
+
+.detail-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  padding-bottom: 0.75rem;
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.detail-item .title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  word-break: break-all;
+}
+
+.detail-item .subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+  word-break: break-all;
+}
+
+.detail-item .status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-top: 0.4rem;
+}
+
+.detail-item .status-indicator.success { color: var(--color-green); }
+.detail-item .status-indicator.failure { color: var(--color-red); }
+
+/* Screenshots Visual section */
+.screenshots-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.screenshot-box {
+  background: rgba(6, 9, 19, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.screenshot-box span {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.screenshot-box img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  max-height: 250px;
+  object-fit: contain;
+}
+
+/* Footer styling */
+footer {
+  border-top: 1px solid var(--border-color);
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-top: 4rem;
+}
+
+footer a {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: var(--color-cyan);
 }
