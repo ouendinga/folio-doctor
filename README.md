@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🩺 FolioDoctor
 
-## Getting Started
+> **Evaluador y Diagnóstico Clínico para Portafolios de Desarrolladores y Diseñadores.**
 
-First, run the development server:
+**FolioDoctor** es una herramienta automatizada con temática de clínica médica diseñada para auditar, puntuar y diagnosticar la salud de portafolios web profesionales. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+En lugar de simples métricas estáticas, FolioDoctor realiza pruebas dinámicas de comportamiento y utiliza Inteligencia Artificial para prescribir una **"Receta Médica"** accionable que maximice la conversión de visitas en oportunidades de contratación.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+💻 **Prueba la aplicación en vivo**: [foliodoctor.alvarosolis.dev](https://foliodoctor.alvarosolis.dev)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📸 Capturas Clínicas de la Aplicación
 
-## Learn More
+### 1. Panel de Ingreso de Pacientes (Landing Page)
+La interfaz cuenta con una estética quirúrgica cyberpunk oscura (Vanilla CSS puro) y una barra de progreso que emula un electrocardiograma durante los análisis.
+![FolioDoctor Landing Page](public/screenshots/foliodoctor-ready.png)
 
-To learn more about Next.js, take a look at the following resources:
+### 2. Historial Clínico y Receta del Doctor (Reporte)
+Muestra un desglose completo de puntuaciones Lighthouse, visualización de capturas móviles/desktop side-by-side, auditoría detallada de interactividad, y la prescripción diagnóstica generada por IA.
+![FolioDoctor Performance & Advice Report](public/screenshots/foliodoctor-report.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🩺 Los 36 Puntos de Diagnóstico Clínico
 
-## Deploy on Vercel
+FolioDoctor evalúa portafolios basándose en 36 puntos clínicos divididos en las siguientes áreas de especialidad:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* **🎨 Diseño y Estética**: Unicidad del diseño, distribución de márgenes/espacios, saturación visual, soporte nativo de Light/Dark Mode y presencia de Favicon.
+* **💡 UX y Mensaje (CTA)**: Claridad inmediata de la profesión/propuesta nada más entrar, relevancia y orden cronológico inverso de la experiencia, densidad del texto y coherencia visual del botón.
+* **🔍 SEO y Accesibilidad**: Contrastes de color legibles, robots.txt/sitemaps, soporte multi-idioma nativo, etiquetas OpenGraph y accesibilidad (WCAG).
+* **⚡ Rendimiento y Seguridad**: Optimización de recursos, adaptabilidad responsive fluida, protocolos HTTPS y control de errores JavaScript en consola.
+* **🤖 Pruebas de Interactividad con Playwright**:
+  * **Test de Botones**: Verifica si la zona táctil (bounding box) de cada botón es de al menos `44x44px` (estándar de accesibilidad móvil) para evitar botones engañosos o difíciles de pulsar.
+  * **Bypass de Obstrucción**: Comprueba el estado de Hover para asegurar que no hay elementos encimados que impidan hacer clic.
+  * **Enlaces Rotos**: Rastrea y comprueba de forma asíncrona que todos los enlaces (internos y externos) respondan con status `200/3xx` OK.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🛠️ Stack Tecnológico
+
+FolioDoctor predica con el ejemplo técnico de alta optimización y limpieza:
+* **Core**: Next.js 16 (App Router) & TypeScript
+* **Estilos**: Vanilla CSS puro (sin Tailwind u hojas cargadas de componentes externos) para alcanzar un Lighthouse de 100/100.
+* **Automatización**: Playwright Chromium para pruebas dinámicas de renderizado e interactividad.
+* **IA**: Llama 3.3 / Gemini 2.5 a través de **OpenRouter** para el motor de diagnóstico clínico.
+
+---
+
+## 🚀 Instalación y Configuración Local
+
+1. **Clonar el repositorio**:
+   ```bash
+   git clone https://github.com/ouendinga/folio-doctor.git
+   cd folio-doctor
+   ```
+
+2. **Instalar dependencias y navegadores de Playwright**:
+   ```bash
+   npm install
+   npx playwright install chromium
+   ```
+
+3. **Configurar variables de entorno**:
+   Crea un archivo `.env.local` en la raíz del proyecto con tu API Key de OpenRouter:
+   ```env
+   OPENROUTER_API_KEY=tu_api_key_aqui
+   ```
+
+4. **Correr en modo desarrollo**:
+   ```bash
+   npm run dev
+   ```
+   Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
+
+---
+
+## ☁️ Despliegue en Producción (Vercel)
+
+El proyecto está preparado para desplegarse en **Vercel** de manera gratuita conectando tu repositorio de GitHub. 
+
+### Nota sobre Chromium en Vercel
+Dado que Vercel tiene un límite de peso de paquete (50MB) y tiempo de ejecución de 10 segundos en su capa gratuita (Hobby), el scraper de Playwright con Chromium local puede presentar limitaciones. El proyecto cuenta con un sistema de degradación suave: si Vercel no puede levantar el navegador Chrome local, el backend retornará los análisis de Lighthouse (PageSpeed API) y el diagnóstico de la IA, asegurando que la aplicación funcione en vivo al 100%.
+
+Para un soporte completo de Playwright con Chromium sin límites de tiempo de ejecución, se recomienda hospedar la API en tu VPS de Coolify/Hetzner.
