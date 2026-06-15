@@ -182,7 +182,7 @@ ${report.advice || 'No se generaron recomendaciones.'}
                 <p className="timestamp">
                   Analizado el: {new Date(report.timestamp).toLocaleString('es-ES')}
                 </p>
-                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '1.5rem' }}>
+                <div className="button-group" style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '1.5rem' }}>
                   <button onClick={handleReset} className="submit-btn no-print" style={{ background: 'transparent', border: '1px solid var(--border-color)', color: 'white' }}>
                     💉 Alta Médica
                   </button>

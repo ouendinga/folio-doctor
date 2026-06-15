@@ -590,8 +590,66 @@ footer a:hover {
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
+  body {
+    background-size: 100% 100%, 100% 100%, 20px 20px, 20px 20px;
+  }
+
+  main {
+    padding: 1.5rem 1rem !important;
+  }
+
+  .hero h1 {
+    font-size: 2.25rem !important;
+  }
+
+  .audit-form-container {
+    padding: 1.25rem !important;
+  }
+
+  .clinic-header-card {
+    padding: 1.5rem !important;
+    gap: 1.5rem !important;
+    border-radius: 12px !important;
+  }
+
+  .patient-info h2 {
+    font-size: 1.5rem !important;
+  }
+
+  .clinic-header-card .button-group {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+  }
+
+  .clinic-header-card .button-group button {
+    width: 100% !important;
+  }
+
+  .score-grid {
+    gap: 1rem !important;
+  }
+
+  .clinical-recipe {
+    padding: 1.5rem !important;
+  }
+
+  .detail-section-card {
+    padding: 1.25rem !important;
+  }
+
   .screenshots-container {
     grid-template-columns: 1fr !important;
+  }
+
+  .detail-item .title {
+    font-size: 0.875rem !important;
+    word-break: break-word !important;
+  }
+
+  .detail-item .subtitle {
+    font-size: 0.8rem !important;
+    word-break: break-all !important;
   }
 }
 
